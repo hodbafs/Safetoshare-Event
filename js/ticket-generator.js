@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let employeeList = [];
   let pollingTimer = null;
   let isAdminMode = false;
+  let tomSelectInstance = null;
+  let cachedListStr = '';
 
   // DOM Elements
   const modalStepSeat = document.getElementById('modal-step-seat');
@@ -244,10 +246,24 @@ document.addEventListener('DOMContentLoaded', () => {
   // Populate Employee Dropdown
   function populateEmployeeDropdown(list) {
     if (!userEmployeeSelect) return;
-    const currentVal = userEmployeeSelect.value;
-    userEmployeeSelect.innerHTML = '<option value="">-- กรุณาเลือกชื่อของคุณ --</option>';
+    
+    // ป้องกันการรีเฟรชถ้าข้อมูลไม่เปลี่ยน (เพื่อไม่ให้กวนผู้ใช้ตอนกำลังพิมพ์ค้นหา)
+    const newListStr = JSON.stringify(list);
+    if (newListStr === cachedListStr) return;
+    cachedListStr = newListStr;
 
-    list.forEach(emp => {
+    const currentVal = tomSelectInstance ? tomSelectInstance.getValue() : userEmployeeSelect.value;
+    
+    // Sort A-Z (ภาษาไทยและอังกฤษ)
+    const sortedList = [...list].sort((a, b) => {
+      const nameA = a.fullName || '';
+      const nameB = b.fullName || '';
+      return nameA.localeCompare(nameB, 'th');
+    });
+
+    userEmployeeSelect.innerHTML = '<option value="">-- พิมพ์ค้นหา หรือ เลื่อนเลือกชื่อของคุณ --</option>';
+
+    sortedList.forEach(emp => {
       const opt = document.createElement('option');
       opt.value = emp.email || emp.fullName;
       opt.textContent = `${emp.fullName} (${emp.email || 'BAFS'}) ${emp.seatNo ? '❌ จองแล้ว: ' + emp.seatNo : '✅ ยังไม่จอง'}`;
@@ -261,18 +277,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (currentVal) userEmployeeSelect.value = currentVal;
+
+    // Initialize or Sync Tom Select
+    if (!tomSelectInstance) {
+      tomSelectInstance = new TomSelect(userEmployeeSelect, {
+        create: false,
+        maxOptions: null, // แสดงผลทั้งหมดเมื่อเลื่อนดู
+        placeholder: "-- พิมพ์ค้นหา หรือ เลื่อนเลือกชื่อของคุณ --"
+      });
+    } else {
+      tomSelectInstance.sync();
+      if (currentVal) tomSelectInstance.setValue(currentVal, true);
+    }
   }
 
   function populateEmployeeDropdownFallback() {
     if (!userEmployeeSelect || userEmployeeSelect.options.length > 2) return;
-    userEmployeeSelect.innerHTML = `
-      <option value="">-- กรุณาเลือกชื่อของคุณ --</option>
-      <option value="Kanit Seetong" data-name="Kanit Seetong" data-dept="kanit@bafs.co.th">Kanit Seetong (kanit@bafs.co.th)</option>
-      <option value="Gritt Madisara" data-name="Gritt Madisara" data-dept="gritt.m@bafs.co.th">Gritt Madisara (gritt.m@bafs.co.th)</option>
-      <option value="Anawat Kiatfuengfoo" data-name="Anawat Kiatfuengfoo" data-dept="anawat@bafs.co.th">Anawat Kiatfuengfoo (anawat@bafs.co.th)</option>
-      <option value="Rachanok Sa-nguansub" data-name="Rachanok Sa-nguansub" data-dept="rachanok@bafs.co.th">Rachanok Sa-nguansub (rachanok@bafs.co.th)</option>
-      <option value="Panita Promnart" data-name="Panita Promnart" data-dept="panita@bafs.co.th">Panita Promnart (panita@bafs.co.th)</option>
-    `;
+    const fallbackList = [
+      { fullName: "Anawat Kiatfuengfoo", email: "anawat@bafs.co.th" },
+      { fullName: "Gritt Madisara", email: "gritt.m@bafs.co.th" },
+      { fullName: "Kanit Seetong", email: "kanit@bafs.co.th" },
+      { fullName: "Panita Promnart", email: "panita@bafs.co.th" },
+      { fullName: "Rachanok Sa-nguansub", email: "rachanok@bafs.co.th" }
+    ];
+    populateEmployeeDropdown(fallbackList);
   }
 
   // Employee Dropdown Select Event
