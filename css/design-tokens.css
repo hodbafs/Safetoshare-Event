@@ -1,0 +1,90 @@
+/* ==========================================================================
+   SAFE TO SHARE : ปลอดภัยที่จะเล่า (น้องพิงใจ) — UI/UX PRO MAX DESIGN TOKENS
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Soft Sanctuary Warm Palette (Natural & Balanced) */
+  --bg-base: #FAF9F6;
+  --bg-gradient: radial-gradient(circle at 50% 15%, #fff4f1 0%, #f0fdfa 55%, #FAF9F6 100%);
+  --bg-mint-soft: #f0fdfa;
+  --bg-mint-pure: #f2fcf8;
+  --bg-peach-soft: #fff4f1;
+  
+  --teal-primary: #0d9488;
+  --teal-hover: #0f766e;
+  --teal-deep: #064e40;
+  --teal-light: #e6f4f1;
+  --teal-glow: rgba(13, 148, 136, 0.22);
+  --teal-900: #134e4a;
+  
+  --mint-emerald: #059669;
+  --peach-pingjai: #ff8a9a;
+  --gold-accent: #d97706;
+  --sky-blue: #0284c7;
+
+  --text-main: #0f172a;
+  --text-body: #334155;
+  --text-muted: #475569;
+  --text-light: #64748b;
+
+  /* Thematic Objectives Pillars */
+  --pillar-retention-accent: #059669;
+  --pillar-retention-bg: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+  --pillar-retention-border: rgba(16, 185, 129, 0.25);
+  
+  --pillar-transparency-accent: #0284c7;
+  --pillar-transparency-bg: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+  --pillar-transparency-border: rgba(14, 165, 233, 0.25);
+
+  --pillar-culture-accent: #d97706;
+  --pillar-culture-bg: linear-gradient(135deg, #ffffff 0%, #fffbeb 100%);
+  --pillar-culture-border: rgba(245, 158, 11, 0.25);
+
+  /* Timeline Tokens */
+  --timeline-track-color: linear-gradient(180deg, #0d9488 0%, #059669 50%, #064e40 100%);
+  --speaker-card-bg: linear-gradient(135deg, #ffffff 0%, #f0fdfa 70%, #fffbeb 100%);
+  --speaker-card-border: #0d9488;
+
+  /* Frameless Sanctuary Tokens */
+  --badge-invited-bg: linear-gradient(135deg, #0d9488 0%, #064e40 100%);
+  --btn-cta-bg: linear-gradient(135deg, #0d9488 0%, #064e40 100%);
+  --btn-cta-shadow: 0 18px 40px rgba(13, 148, 136, 0.35), 0 0 0 4px rgba(255, 255, 255, 0.95);
+
+  /* Clean Typography Fonts */
+  --font-thai: 'Prompt', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Prompt', 'Outfit', sans-serif;
+  --font-number: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+
+  /* Glassmorphism Tokens */
+  --glass-bg: rgba(255, 255, 255, 0.88);
+  --glass-bg-hover: rgba(255, 255, 255, 0.96);
+  --glass-border: rgba(255, 255, 255, 0.9);
+  --glass-shadow: 0 20px 40px -15px rgba(13, 148, 136, 0.12);
+  --glass-blur: blur(18px);
+
+  /* Spacing Scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* Motion Transitions */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.2s var(--ease-smooth);
+  --transition-normal: 0.35s var(--ease-smooth);
+
+  /* Door System Tokens */
+  --door-bg: linear-gradient(180deg, #ffffff 0%, #f0fdfa 60%, #e6f4f1 100%);
+  --door-border: rgba(13, 148, 136, 0.18);
+  --door-shadow: 0 8px 32px rgba(13, 148, 136, 0.08), 0 2px 8px rgba(0,0,0,0.04);
+  --door-knob-bg: linear-gradient(135deg, #d1d5db 0%, #9ca3af 40%, #e5e7eb 100%);
+  --door-knob-glow: 0 0 20px rgba(13, 148, 136, 0.4);
+  --door-open-duration: 1.2s;
+  --particle-opacity: 0.25;
+}
