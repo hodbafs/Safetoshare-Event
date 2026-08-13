@@ -295,6 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!userEmployeeSelect || userEmployeeSelect.options.length > 2) return;
     const fallbackList = [
       { fullName: "Anawat Kiatfuengfoo", email: "anawat@bafs.co.th" },
+      { fullName: "Chitakon Prasomsi", email: "chitakon@bafs.co.th" },
       { fullName: "Gritt Madisara", email: "gritt.m@bafs.co.th" },
       { fullName: "Kanit Seetong", email: "kanit@bafs.co.th" },
       { fullName: "Panita Promnart", email: "panita@bafs.co.th" },
